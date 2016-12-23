@@ -515,7 +515,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "XPathsRequest": {
                                     "description": "A list of XPath expressions that will be evaluated against XML payloads (if any) in the request path. Any XPaths that successfully resolve will result in the value of the XML element being masked.",
@@ -815,7 +815,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "XPathsRequest": {
                                     "description": "A list of XPath expressions that will be evaluated against XML payloads (if any) in the request path. Any XPaths that successfully resolve will result in the value of the XML element being masked.",
@@ -1139,7 +1139,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "attributes": {
                                     "description": "Name/value elements used to extend the default profile",
@@ -4901,7 +4901,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "name": {
                                     "description": "Name of the company to be created.",
@@ -7709,7 +7709,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "attributes": {
                                     "description": "Arbitrary name/value attributes that may be used for customizing profile information or for developer app-specific processing.",
@@ -8347,7 +8347,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "description": {
                                     "description": "Environment description..",
@@ -8888,7 +8888,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "name": {
                                     "description": "The name of the cache. Must be unique in the environment. Reference this cache from policies that interact with the cache resource.",
@@ -10753,7 +10753,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+                            
                             "properties": {
                                 "description": {
                                     "description": "A description of the cache resource.",
@@ -11377,7 +11377,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": null,
+
                             "properties": {
                                 "attributes": {
                                     "description": "Name/value elements used to extend the default profile.",
