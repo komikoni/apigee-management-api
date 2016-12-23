@@ -1,0 +1,13 @@
+{
+  "name": "scraping_sample",
+  "version": "0.0.1",
+  "main": "app.js",
+  "description": "scraping sample",
+  "author": "Rei Matsushita",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "*",
+    "limit-request-promise": "*",
+    "to-markdown": "^3.0.3"
+  }
+}
