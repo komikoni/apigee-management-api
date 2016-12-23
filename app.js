@@ -5,13 +5,21 @@ var fs = require('fs');
 
 var lp = new LimitRequestPromise(1,1); // option = default limit
 lp.setup([
-  {host:'https://docs.apigee.com',max:30,sec:1}
+  {host:'https://docs.apigee.com',max:15,sec:1}
 ]);
 var cheerioFunc = function (body) {
     return cheerio.load(body);
 }
 var toMarkdownOption = {
-   gfm: true
+   gfm: true,
+   converters: [
+     {
+     filter: ['div','span'],
+     replacement: function (innerHTML) {
+        return toMarkdown(innerHTML, toMarkdownOption)
+      }
+    }
+  ]
 }
 var swaggerJson = {
   "swagger": "2.0",
@@ -49,7 +57,7 @@ lp.req({uri: 'https://docs.apigee.com/management/apis', transform: cheerioFunc})
 .then(function($){
   var tasks= [];
   $('div.method_data.title').each(function (idx) {
-    // if(idx >10){
+    // if(idx >20){
     //   return false;
     // }
     var $this = $(this);
@@ -66,7 +74,7 @@ lp.req({uri: 'https://docs.apigee.com/management/apis', transform: cheerioFunc})
       var contentType = $('[data-role="content-type"]').text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
       var category = $('[data-role="category"]').text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
 //      var description = $('.description_container').text().replace(/^\s+|\s+$|\s*,\s6*$/g,'');
-      var description = toMarkdown($('.description_container').html().replace(/\\n|\\\n/g,'  '));
+      var description = toMarkdown($('.description_container').html().replace(/\\n|\\r|\\\n/g,'  '),toMarkdownOption);
 
       var parameters =[];
       // Headerパラメータ読み取り
@@ -76,7 +84,7 @@ lp.req({uri: 'https://docs.apigee.com/management/apis', transform: cheerioFunc})
         var name = $this.find('[data-role="name"]').text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
         var requiredText = $this.find('[data-role="required"]').text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
 //        var description = $('[data-role="description"]').text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
-        var description = toMarkdown($('[data-role="description"]').html().replace(/\\n|\\\n/g,'  '));
+        var description = toMarkdown($('[data-role="description"]').html().replace(/\\n|\\r|\\\n/g,'  '),toMarkdownOption);
         parameters.push({
             "name": name,
             "in": "header",
@@ -96,18 +104,18 @@ lp.req({uri: 'https://docs.apigee.com/management/apis', transform: cheerioFunc})
           var $this = $(this);
           var name = $this.find('td').eq(0).text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
 //          var description = $this.find('td').eq(1).text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
-          var description = toMarkdown($this.find('td').eq(1).html().replace(/\\n|\\\n/g,'  '));
+          var description = toMarkdown($this.find('td').eq(1).html().replace(/\\n|\\r|\\\n/g,'  '),toMarkdownOption);
           var defaultText = $this.find('td').eq(2).text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
           var Required = $this.find('td').eq(3).text().replace(/^\s+|\s+$|\s*,\s*$/g,'');
           properties[name] = {
             description: description,
             type: "string"
           }
-          if (Required = "Yes") {
+          if (Required == "Yes") {
             bodyRequired.push(name);
           }
         });
-        if (bodyRequired.length = 0) {
+        if (bodyRequired.length == 0) {
           bodyRequired = null;
         }
         parameters.push({
