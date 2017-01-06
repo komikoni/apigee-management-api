@@ -2038,10 +2038,10 @@
                     }
                 ],
                 "consumes": [
-                    "application/x-www-form-urlencoded"
+                    "application/json"
                 ],
                 "produces": [
-                    "application/x-www-form-urlencoded"
+                    "application/json"
                 ],
                 "summary": "List Roles of Organization",
                 "description": "Gets a list of roles available to users in an organization.",
@@ -2942,10 +2942,10 @@
                     }
                 ],
                 "consumes": [
-                    "application/x-www-form-urlencoded"
+                    "application/json"
                 ],
                 "produces": [
-                    "application/x-www-form-urlencoded"
+                    "application/json"
                 ],
                 "summary": "Get KeyValueMap Entry in an Environment",
                 "description": "Gets a specific key/value map entry in an environment by name, along with associated entries. You can also create and manage environment-scoped key/value maps in the management UI. For more information, see [Creating and editing environment key/value maps](/docs/api-services/content/creating-and-editing-environment-keyvalue-maps).",
@@ -10753,7 +10753,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            
+
                             "properties": {
                                 "description": {
                                     "description": "A description of the cache resource.",

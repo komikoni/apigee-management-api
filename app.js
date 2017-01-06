@@ -133,10 +133,8 @@ lp.req({uri: 'https://docs.apigee.com/management/apis', transform: cheerioFunc})
 
       // swaggerJsonを生成（書き込み順序不定）
       var pathVerbJson = {
-        "tags": category.split(','),
-        "security":[
-          {basicAuth: []}
-        ],
+        "tags": [category.split(',')[0]],
+        "security":[{basicAuth: []}],
         "consumes": contentType.split(','),
         "produces": contentType.split(','),
         "summary": title,
@@ -151,7 +149,7 @@ lp.req({uri: 'https://docs.apigee.com/management/apis', transform: cheerioFunc})
       };
       pathVerbJsonList[path+' '+verb] = pathVerbJson;
     }).catch(function(reason){
-      console.log('api:page(' + idx +')' ,reason)
+      console.log('api:page(' + path + ' ' + verb +')' ,reason)
     })
     tasks.push(task);
   })
